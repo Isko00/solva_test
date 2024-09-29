@@ -1,0 +1,15 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="solva_test.main:Web exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/solva_test_main_Web_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="solva_test.main/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="solva_test.main" />
+          <element id="module-output" name="solva_test.test" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="solva_test.test/web/Web" />
+    </root>
+  </artifact>
+</component>
