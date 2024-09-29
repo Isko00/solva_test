@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.1.0' // Adjust version as needed
+    id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'com.example'
+version = '1.0-SNAPSHOT'
+sourceCompatibility = '17' // Set your Java version
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Spring Boot Web for REST APIs
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // Spring Data JPA for database access
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // H2 database (for in-memory testing, you can replace with MySQL/PostgreSQL)
+    runtimeOnly 'com.h2database:h2'
+
+    // PostgreSQL or MySQL driver (use based on your database)
+    runtimeOnly 'org.postgresql:postgresql'
+
+    // Spring Boot Test dependencies (JUnit, Mockito, AssertJ)
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.mockito:mockito-core:5.0.0'
+    testImplementation 'org.assertj:assertj-core:3.23.0'
+
+    // WebClient for external API calls (can use RestTemplate as an alternative)
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+    // Liquibase alternative for migrations
+    implementation 'org.liquibase:liquibase-core'
+}
+
+test {
+    useJUnitPlatform()
+}
