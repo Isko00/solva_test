@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
+    // Query method to find transactions where limitExceeded is true
     List<Transaction> findByLimitExceeded(boolean limitExceeded);
 }
