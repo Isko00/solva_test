@@ -1,28 +1,20 @@
 package com.example.transactionservice.service;
 
+import com.example.transactionservice.model.Currency;
+import com.example.transactionservice.model.ExpenseCategory;
 import com.example.transactionservice.model.Limit;
-import com.example.transactionservice.repository.LimitRepository;
-import org.springframework.stereotype.Service;
+import com.example.transactionservice.model.request.LimitRequest;
 
+import java.math.BigDecimal;
 import java.util.List;
-import java.time.LocalDateTime;
 
-@Service
-public class LimitService {
+public interface LimitService {
+    boolean isLimitExceeded(ExpenseCategory expenseCategory, Long account, BigDecimal sum);
+    Limit getLastLimit(ExpenseCategory expenseCategory, Long accountId);
+    Limit save(LimitRequest limitRequest);
+    Limit save(Long accountId, BigDecimal sum, Currency currency, ExpenseCategory expenseCategory);
 
-    private final LimitRepository limitRepository;
+    Limit reductLimit(Long accountId, BigDecimal sum, Currency currency, ExpenseCategory expenseCategory);
 
-    public LimitService(LimitRepository limitRepository) {
-        this.limitRepository = limitRepository;
-    }
-
-    public Limit setNewLimit(Limit limitRequest) {
-        // Logic to set a new limit
-            limitRequest.setLimitDatetime(LocalDateTime.now());
-        return limitRepository.save(limitRequest);
-    }
-
-    public List<Limit> getAllLimits() {
-        return limitRepository.findAll();
-    }
+    List<Limit> getAllLimits();
 }
