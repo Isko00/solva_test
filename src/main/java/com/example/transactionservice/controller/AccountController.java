@@ -1,9 +1,7 @@
 package com.example.transactionservice.controller;
 
 import com.example.transactionservice.model.Account;
-import com.example.transactionservice.model.Transaction;
 import com.example.transactionservice.model.request.AccountRequest;
-import com.example.transactionservice.service.AccountService;
 import com.example.transactionservice.service.AccountServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +17,7 @@ public class AccountController {
     private final AccountServiceImpl accountService;
 
     @PostMapping
-    public ResponseEntity add(@RequestBody AccountRequest accountRequest) {
+    public ResponseEntity<Account> add(@RequestBody AccountRequest accountRequest) {
         Account savedAccount = accountService.save(accountRequest);
         return ResponseEntity.status(201).body(savedAccount);
     }

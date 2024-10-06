@@ -12,8 +12,6 @@ import java.time.LocalDateTime;
 @Component
 @Log4j2
 public class LimitResetScheduler {
-    private final LimitServiceImpl limitService;
-
     @Scheduled(cron = "0 0 0 1 * *")
     public void reportCurrentTime() {
         log.info("The time is now {}", LocalDateTime.now());

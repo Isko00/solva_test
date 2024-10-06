@@ -14,7 +14,7 @@ public interface LimitService {
     Limit save(LimitRequest limitRequest);
     Limit save(Long accountId, BigDecimal sum, Currency currency, ExpenseCategory expenseCategory);
 
-    Limit reductLimit(Long accountId, BigDecimal sum, Currency currency, ExpenseCategory expenseCategory);
+    void reductLimit(Long accountId, BigDecimal sum, Currency currency, ExpenseCategory expenseCategory);
 
     List<Limit> getAllLimits();
 }

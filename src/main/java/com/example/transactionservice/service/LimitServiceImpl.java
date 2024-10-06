@@ -41,11 +41,11 @@ public class LimitServiceImpl implements LimitService {
     }
 
     @Override
-    public Limit reductLimit(Long accountId, BigDecimal sum, Currency currency, ExpenseCategory expenseCategory) {
+    public void reductLimit(Long accountId, BigDecimal sum, Currency currency, ExpenseCategory expenseCategory) {
         Limit lastLimit = getLastLimit(expenseCategory, accountId);
         lastLimit.setSum(lastLimit.getSum().subtract(sum));
         // Logic to set a new limit
-        return limitRepository.save(lastLimit);
+        limitRepository.save(lastLimit);
     }
 
     public List<Limit> getAllLimits() {

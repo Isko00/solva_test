@@ -48,6 +48,7 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
         String url = String.format("%s?symbol=USD/%s&apikey=%s", apiUrl, fromCurrency, apiKey);
 
         // Call the TwelveData API and get the response as a Map
+        @SuppressWarnings("unchecked")
         Map<String, Object> response = restTemplate.getForObject(url, Map.class);
 
         // Extract the exchange rate from the response

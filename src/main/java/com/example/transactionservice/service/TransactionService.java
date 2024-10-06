@@ -7,6 +7,5 @@ import java.util.List;
 
 public interface TransactionService {
     Transaction save(TransactionRequest transactionRequest);
-    List<Transaction> getAllTransactions();
     List<Transaction> getExceededTransactions();
 }
