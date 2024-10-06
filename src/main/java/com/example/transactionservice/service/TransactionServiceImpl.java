@@ -25,10 +25,6 @@ public class TransactionServiceImpl implements TransactionService {
         return saveTransaction;
     }
 
-    public List<Transaction> getAllTransactions() {
-        return transactionRepository.findAll();
-    }
-
     // Method to get transactions where limitExceeded is true
     public List<Transaction> getExceededTransactions() {
         return transactionRepository.findByLimitExceeded(true);

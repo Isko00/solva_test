@@ -1,6 +1,5 @@
 package com.example.transactionservice.service.scheduler;
 
-import com.example.transactionservice.service.LimitServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.scheduling.annotation.Scheduled;
