@@ -71,6 +71,52 @@ databaseChangeLog:
       author: postgres
       changes:
         - createTable:
+            tableName: limits
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: sum
+                  type: DECIMAL(18, 2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: balance
+                  type: DECIMAL(18, 2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: currency
+                  type: VARCHAR(3)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: account_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_account_id
+                    references: accounts(id)
+              - column:
+                  name: expense_category
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: datetime
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 5
+      author: postgres
+      changes:
+        - createTable:
             tableName: transactions
             columns:
               - column:
@@ -118,45 +164,10 @@ databaseChangeLog:
                   name: limit_exceeded
                   type: BOOLEAN
                   defaultValueBoolean: false
-
-  - changeSet:
-      id: 5
-      author: postgres
-      changes:
-        - createTable:
-            tableName: limits
-            columns:
               - column:
-                  name: id
-                  type: BIGINT
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-              - column:
-                  name: sum
-                  type: DECIMAL(18, 2)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: currency
-                  type: VARCHAR(3)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: account_id
+                  name: limit_id
                   type: BIGINT
                   constraints:
                     nullable: false
                     foreignKeyName: fk_account_id
-                    references: accounts(id)
-              - column:
-                  name: expense_category
-                  type: VARCHAR(50)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: datetime
-                  type: TIMESTAMP
-                  constraints:
-                    nullable: false
+                    references: limits(id)

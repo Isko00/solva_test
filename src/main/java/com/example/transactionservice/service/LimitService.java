@@ -11,10 +11,10 @@ import java.util.List;
 public interface LimitService {
     boolean isLimitExceeded(ExpenseCategory expenseCategory, Long account, BigDecimal sum);
     Limit getLastLimit(ExpenseCategory expenseCategory, Long accountId);
-    Limit save(LimitRequest limitRequest);
+    void save(LimitRequest limitRequest);
     Limit save(Long accountId, BigDecimal sum, Currency currency, ExpenseCategory expenseCategory);
 
-    void reductLimit(Long accountId, BigDecimal sum, Currency currency, ExpenseCategory expenseCategory);
+    void reductLimit(Long accountId, BigDecimal balance, Currency currency, ExpenseCategory expenseCategory);
 
     List<Limit> getAllLimits();
 }

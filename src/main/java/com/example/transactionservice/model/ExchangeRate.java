@@ -18,7 +18,6 @@ public class ExchangeRate {
     private BigDecimal close_rate;
     private LocalDate date;
 
-    // No-args constructor (required by JPA)
     public ExchangeRate() {
     }
 

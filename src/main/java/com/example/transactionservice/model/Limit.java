@@ -14,6 +14,7 @@ public class Limit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private BigDecimal sum;
+    private BigDecimal balance;
     @Enumerated(EnumType.STRING)
     private Currency currency;
     private Long accountId;
@@ -21,9 +22,10 @@ public class Limit {
     @Enumerated(EnumType.STRING)
     private ExpenseCategory expenseCategory;
 
-    public Limit(Long accountId, BigDecimal sum, Currency currency, LocalDateTime datetime, ExpenseCategory expenseCategory) {
+    public Limit(Long accountId, BigDecimal sum, BigDecimal balance, Currency currency, LocalDateTime datetime, ExpenseCategory expenseCategory) {
         this.accountId = accountId;
         this.sum = sum;
+        this.balance = balance;
         this.currency = currency;
         this.datetime = datetime;
         this.expenseCategory = expenseCategory;

@@ -1,4 +1,4 @@
-package com.example.transactionservice.service;
+package com.example.transactionservice.service.impl;
 
 import com.example.transactionservice.mapper.AccountMapper;
 import com.example.transactionservice.model.Account;
@@ -6,6 +6,8 @@ import com.example.transactionservice.model.Currency;
 import com.example.transactionservice.model.ExpenseCategory;
 import com.example.transactionservice.model.request.AccountRequest;
 import com.example.transactionservice.repository.AccountRepository;
+import com.example.transactionservice.service.AccountService;
+import com.example.transactionservice.service.LimitService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,13 +29,10 @@ public class AccountServiceImpl implements AccountService {
     }
 
     private void addDefaultLimits(Long accountId) {
-        // Define the default limit amount
         BigDecimal defaultLimit = new BigDecimal("1000.00");
 
-        // Add limit for GOODS
         limitService.save(accountId, defaultLimit, Currency.USD, ExpenseCategory.GOODS);
 
-        // Add limit for SERVICES
         limitService.save(accountId, defaultLimit, Currency.USD, ExpenseCategory.SERVICES);
     }
 }

@@ -18,15 +18,17 @@ public class Transaction {
     private Long accountTo;
     @Enumerated(EnumType.STRING)
     private Currency currency;
-    private BigDecimal sum; // Original amount
+    private BigDecimal sum;
 
     private ExpenseCategory expenseCategory;
     private LocalDateTime datetime;
     private boolean limitExceeded;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "limit_id", referencedColumnName = "id")
+    private Limit limit;
 
-    // Constructor with required arguments
     public Transaction(Long accountFrom, Long accountTo, Currency currency, BigDecimal sum,
-                       ExpenseCategory expenseCategory, LocalDateTime datetime, boolean limitExceeded) {
+                       ExpenseCategory expenseCategory, LocalDateTime datetime, boolean limitExceeded, Limit limit) {
         this.accountFrom = accountFrom;
         this.accountTo = accountTo;
         this.currency = currency;
@@ -34,9 +36,9 @@ public class Transaction {
         this.expenseCategory = expenseCategory;
         this.datetime = datetime;
         this.limitExceeded = limitExceeded;
+        this.limit = limit;
     }
 
-    // No-argument constructor (for JPA)
     public Transaction() {
     }
 }

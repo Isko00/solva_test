@@ -1,9 +1,10 @@
-package com.example.transactionservice.service;
+package com.example.transactionservice.service.impl;
 
-import com.example.transactionservice.mapper.LimitMapperImpl;
+import com.example.transactionservice.mapper.impl.LimitMapperImpl;
 import com.example.transactionservice.model.*;
 import com.example.transactionservice.model.request.LimitRequest;
 import com.example.transactionservice.repository.LimitRepository;
+import com.example.transactionservice.service.LimitService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class LimitServiceImpl implements LimitService {
     private final LimitMapperImpl limitMapper;
 
     public boolean isLimitExceeded(ExpenseCategory expenseCategory, Long account, BigDecimal sum) {
-         return getLastLimit(expenseCategory, account).getSum().compareTo(sum) < 0;
+         return getLastLimit(expenseCategory, account).getBalance().compareTo(sum) < 0;
     }
 
     public Limit getLastLimit(ExpenseCategory expenseCategory, Long accountId) {
@@ -28,23 +29,20 @@ public class LimitServiceImpl implements LimitService {
         return limitOptional.orElseThrow(() -> new IllegalArgumentException("No limits found for the specified parameters."));
     }
 
-    public Limit save(LimitRequest limitRequest) {
-        // Logic to set a new limit
-        return limitRepository.save(limitMapper.toEntity(limitRequest));
+    public void save(LimitRequest limitRequest) {
+        limitRepository.save(limitMapper.toEntity(limitRequest));
     }
 
     @Override
     public Limit save(Long accountId, BigDecimal sum, Currency currency, ExpenseCategory expenseCategory) {
         var saveLimit = limitMapper.toEntity(accountId, sum, currency, expenseCategory);
-        // Logic to set a new limit
         return limitRepository.save(saveLimit);
     }
 
     @Override
     public void reductLimit(Long accountId, BigDecimal sum, Currency currency, ExpenseCategory expenseCategory) {
         Limit lastLimit = getLastLimit(expenseCategory, accountId);
-        lastLimit.setSum(lastLimit.getSum().subtract(sum));
-        // Logic to set a new limit
+        lastLimit.setBalance(lastLimit.getBalance().subtract(sum));
         limitRepository.save(lastLimit);
     }
 

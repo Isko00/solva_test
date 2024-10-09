@@ -2,7 +2,7 @@ package com.example.transactionservice.controller;
 
 import com.example.transactionservice.model.Account;
 import com.example.transactionservice.model.request.AccountRequest;
-import com.example.transactionservice.service.AccountServiceImpl;
+import com.example.transactionservice.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/account")
 public class AccountController {
-    private final AccountServiceImpl accountService;
+    private final AccountService accountService;
 
     @PostMapping
     public ResponseEntity<Account> add(@RequestBody AccountRequest accountRequest) {
-        Account savedAccount = accountService.save(accountRequest);
-        return ResponseEntity.status(201).body(savedAccount);
+        accountService.save(accountRequest);
+        return ResponseEntity.status(201).build();
     }
 }
